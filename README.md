@@ -15,7 +15,7 @@ Nós somos da empresa "Fast Engineering S/A" e gostaríamos de uma solução dos
 ![ARQUITETURA](Diagramas/ambienteAtual.JPG)
 
 ## 	:mag_right: ÍNDICE
-1. [Lift and Shift](#1-As-is)
+1. [Lift and Shift](#1-Lift-and-Shift)
 * [Atividades necessárias](#2)
 * [Ferramentas utilizadas](#3)
 * [Diagrama As-Is](#4)
