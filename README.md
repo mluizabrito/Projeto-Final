@@ -18,17 +18,17 @@ Nós somos da empresa "Fast Engineering S/A" e gostaríamos de uma solução dos
 1. [Lift and Shift](#1-Lift-and-Shift)
 * [Atividades necessárias](#11-atividades-necessárias)
 * [Ferramentas utilizadas](#12-ferramentas-utilizadas)
-* [Diagrama As-Is](#13-diagrama-as-is)
-* [Segurança](#5)
-* [Backup](#6)
-* [Custo da Infraestrutura](#7)
-2. [Modernização/Kubenets](#8)
-*  [Atividades necessárias](#9)
-* [Ferramentas utilizadas](#10)
-* [Diagrama](#11)
-* [Segurança](#12)
-* [Backup](#13)
-* [Custo da Infraestrutura](#14)
+* [Diagrama As-Is](#13-diagrama-lift-and-shift)
+* [Segurança](#14-segurança)
+* [Backup](#15-backup)
+* [Custo da Infraestrutura](#16-aws-pricing)
+2. [Modernização/Kubenets](#2-kubenets)
+*  [Atividades necessárias](#21-atividades-necessárias)
+* [Ferramentas utilizadas](#22-ferramentas-utilizadas)
+* [Diagrama](#23-diagrama-kubernets)
+* [Segurança](#24-segurança)
+* [Backup](#25-backup)
+* [Custo da Infraestrutura](#26-aws-pricing)
 
 ## 1. Lift and Shift
 Lift and shift, também conhecida como “rehosting” consiste em migrar uma aplicação de um ambiente para outro, sem grandes mudanças. No projeto, o ambiente on-premises da empresa "Fast Engineering S/A" vai ser migrado para a AWS.
@@ -71,6 +71,7 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
 - AWS S3 ( Amazon Simple Storage Service) -> Serviço de armazenamento de objetos. Documentação: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
 - Amazon CloudFront -> Acelera a distribuição de arquivos estáticos. Documentação: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Introduction.html
 - Amazon CloudWatch -> Monitoramento recursos e as aplicações em tempo real na infraestrutura AWS. Documentação: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.ht
+- Amazon Backup -> Permite configurar políticas de backup e monitorar a atividade de recursos na AWS. Documentação: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html
 - Amazon VPC (Virtual private cloud) -> Utilizada para isolamento e segurança de rede, semelhante a rede tradicional. Documentação: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
 - IAM (AWS  Identity and Access Management ) -> É um serviço que permite gerenciar usuários, credenciais de segurança que controlam quais usuário e aplicações podem acessar os recursos da AWS. Documentação: https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html
 - Security Groups -> Configuração de segurança e controle de acesso.
@@ -80,3 +81,32 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
 
 
 ### 1.4 Segurança
+
+- VPC com subnet privadas e pública
+- Banco de dados - RDS em subnet privada
+- Security group limitando o tráfego
+- IAM para limitar acesso aos recursos da AWS
+- Criptografia em repouso KMS para RDS e SSE-S3 (Sem custo adicional) para Amazon S3
+    - Criptografia em trânsito TLS para RDS e HTTPS para S3
+
+### 1.5 Backup
+- AWS backups para EC2
+- RDS ->backups automatizados
+- S3 -> Replication/Versionamento + Ciclo de Vida do S3/Lifecycle Policy
+
+### 1.6 Custo de infraestrutura
+
+### 2. Kubernets
+
+### 2.1 Atividades necessárias
+
+### 2.2 Ferramentas utilizadas
+
+### 2.3 Diagrama Kubernets
+
+### 2.4 Segurança
+
+### 2.5 Backup
+
+### 2.6 AWS Pricing
+
