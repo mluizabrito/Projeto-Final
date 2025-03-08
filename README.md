@@ -33,7 +33,7 @@ Nós somos da empresa "Fast Engineering S/A" e gostaríamos de uma solução dos
 ## 1. Lift and Shift
 Lift and shift, também conhecida como “rehosting” consiste em migrar uma aplicação de um ambiente para outro, sem grandes mudanças. No projeto, o ambiente on-premises da empresa "Fast Engineering S/A" vai ser migrado para a AWS.
 
-### * Atividades necessárias
+## 1.1 Atividades necessárias
 - Analisar a Infraestrutura atual
 
 - Migração do Banco de Dados
