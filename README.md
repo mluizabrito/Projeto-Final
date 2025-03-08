@@ -62,7 +62,7 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
     - Monitoramento com CloudWatch
     - Desative os servidores antigos
 
-### 1.2 Ferramentas utilizadas
+### 1.2  Ferramentas utilizadas
 
 - AWS MGN (Application Migration Service) -> Serviço da Amazon para automatizar a migração Lift and Shift de servidores. Documentação: https://docs.aws.amazon.com/mgn/latest/ug/what-is-application-migration-service.html
 - AWS DMS (Database Migration Service) -> Utilizado para migrar dados em um banco on-premises para o RDS. Documentação: https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html
@@ -108,5 +108,5 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
 
 ### 2.5 Backup
 
-### 2.6 AWS Pricing
+### 2.6 AWS Pricing 
 
