@@ -16,7 +16,7 @@ Nós somos da empresa "Fast Engineering S/A" e gostaríamos de uma solução dos
 
 ## 	:mag_right: ÍNDICE
 1. [Lift and Shift](#1-Lift-and-Shift)
-* [Atividades necessárias](#2-Atividades-necessárias)
+* [Atividades necessárias](#1.1-Atividades-necessárias)
 * [Ferramentas utilizadas](#3)
 * [Diagrama As-Is](#4)
 * [Segurança](#5)
