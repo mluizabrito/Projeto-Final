@@ -40,16 +40,14 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
     - Criar e configurar Amazon RDS para MySQL
     - Configuração do Amazon DMS (Database Migration Service)
 
-- Migração do Frontend:
+- Migração do Frontend e backend
+    - Instale o Replication Agent no servidor de backend local.
+    - Configure o Amazon MGN para replicar o servidor de backend para a AWS.
+    - Configure EC2 e o armazenamento de objetos
     - Criar e configurar Amazon S3 para armazenamento de estáticos
     - Fazer upload dos arquivos do React para o bucket S3
     - Criar e configurar um CloudFront para o bucket
     - Configurar DNS
-
-- Migração do backend
-    - Instale o Replication Agent no servidor de backend local.
-    - Configure o Amazon MGN para replicar o servidor de backend para a AWS.
-    - Configure EC2 e o armazenamento de objetos
 
 - Preparação do ambiente na AWS:
     - Configurar networking -> VPC para isolar os recursos
