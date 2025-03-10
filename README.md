@@ -94,6 +94,10 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
 
 ### 1.6 Custo de infraestrutura
 
+![CUSTO](Diagramas/custoAsIS.JPG)
+
+Para visualizar informações detalhadas sobre a estimativa clique [aqui](custoAWS.pdf)
+
 ### 2. Kubernets
 
 ### 2.1 Atividades necessárias
