@@ -22,7 +22,7 @@ Nós somos da empresa "Fast Engineering S/A" e gostaríamos de uma solução dos
 * [Segurança](#14-segurança)
 * [Backup](#15-backup)
 * [Custo da Infraestrutura](#16-aws-pricing)
-2. [Modernização/Kubenets](#2-kubenets)
+2. [Modernizacao com EKS (Elastic Kubernetes Service)](#2-kubenets)
 *  [Atividades necessárias](#21-atividades-necessárias)
 * [Ferramentas utilizadas](#22-ferramentas-utilizadas)
 * [Diagrama](#23-diagrama-kubernets)
@@ -98,7 +98,21 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
 
 Para visualizar informações detalhadas sobre a estimativa clique [aqui](https://github.com/mluizabrito/Projeto-Final/blob/main/Aws%20Pricing/custoAws.pdf)
 
-### 2. Kubernets
+### 2. Modernizacao com EKS (Elastic Kubernetes Service):
+
+# Objetivos
+
+Queremos modernizar esse sistema para **AWS**, seguindo as **melhores práticas de arquitetura em Cloud AWS**.  
+
+A nova arquitetura deve seguir as seguintes diretrizes:
+
+- **Alta disponibilidade**: Garantir que o sistema esteja sempre acessível, utilizando múltiplas zonas de disponibilidade (AZs).
+- **Escalabilidade**: Permitir crescimento automático da infraestrutura conforme a demanda.
+- **Segurança**: Aplicar boas práticas de segurança, como **IAM**, **VPCs privadas**, **WAF** e **criptografia** de dados.
+- **Custo-efetividade**: Utilizar serviços gerenciados para otimizar custos operacionais.
+- **Monitoramento e Logging**: Implementar **CloudWatch**, **AWS Config** e **GuardDuty** para auditoria e detecção de anomalias.
+- **Automação e Infraestrutura como Código**: Provisionar recursos usando **Terraform** ou **AWS CloudFormation**.
+
 
 ### 2.1 Atividades necessárias
 
@@ -107,6 +121,39 @@ Para visualizar informações detalhadas sobre a estimativa clique [aqui](https:
 ### 2.3 Diagrama Kubernets
 
 ### 2.4 Segurança
+
+# Monitoramento e Segurança na AWS
+
+## CloudWatch Logs e Metrics
+
+- Instalar o **CloudWatch Agent** ou ativar **Container Insights** para coletar logs e métricas dos pods.
+- Criar **alarmes no CloudWatch** para eventos como:
+  - Alto uso de CPU e memória.
+  - Erros **5xx** no **ALB** (Application Load Balancer).
+
+## WAF + CloudFront
+
+- Utilizar o **CloudFront** como **CDN** para conteúdo estático e cache global.
+- Ativar **AWS WAF** para proteger contra ataques de camada 7, como:
+  - **SQL Injection (SQLi)**
+  - **Cross-Site Scripting (XSS)**
+
+## IAM Roles e KMS
+
+- Aplicar o **princípio de menor privilégio** para acesso a recursos.
+- **Criptografar** dados sensíveis utilizando **AWS KMS**.
+
+## GuardDuty e AWS Config (Opcional)
+
+- **Monitorar ameaças e conformidade** com **AWS GuardDuty** e **AWS Config**.
+- Configurar **alertas** para:
+  - Acessos suspeitos.
+  - Configurações inadequadas.
+
+---
+ **Recomendações**  
+Para garantir a segurança e o monitoramento adequado, revise as permissões IAM regularmente e implemente logs centralizados para auditoria.
+
 
 ### 2.5 Backup
 
