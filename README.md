@@ -116,46 +116,188 @@ A nova arquitetura deve seguir as seguintes diretrizes:
 
 ### 2.1 Atividades necessárias
 
+# Atividades Necessárias para a Migração
+
+## 1. Preparação do Ambiente de Contêineres:
+- Criar o cluster Amazon EKS com ferramentas como **eksctl**, **Terraform** ou **CloudFormation**.
+- Configurar **subnets privadas** para pods sem IP público e **subnets públicas** para o **Application Load Balancer (ALB)**.
+- Habilitar o **Cluster Autoscaler** para redimensionamento automático dos nós.
+- Conectar a **VPC** e o **Internet Gateway** para garantir tráfego externo gerenciado pelo **ALB**.
+- Criar e configurar um **Auto Scaling Group** para os **worker nodes**, definindo instâncias (ex.: `m5.large`) e associando **IAM Roles** para operações do Kubernetes.
+
+## 2. Containerização das Aplicações:
+- Criar **Dockerfiles** para as APIs backend (**Nginx** e serviços) e frontend (**React**).
+- Criar repositórios no **Amazon ECR** e armazenar as imagens Docker (`docker push`).
+- Configurar **variáveis de ambiente** (endpoints, credenciais no **Secrets Manager**).
+
+## 3. Implantação das Aplicações no EKS:
+- Criar arquivos **YAML (manifests)** para **Deployments, Services e Ingress**.
+- Configurar o **ALB Ingress Controller** para gerenciar o tráfego externo.
+- Implementar o **Horizontal Pod Autoscaler (HPA)** para escalar pods.
+
+## 4. Integração com Persistência:
+- Migrar o banco de dados para **Amazon RDS MySQL Multi-AZ** e configurar **backups automáticos**.
+- Configurar **buckets no Amazon S3** para arquivos estáticos e definir políticas de acesso (**bucket policies e IAM roles**).
+
+## 5. Pipeline de CI/CD:
+- Criar pipelines com **AWS CodePipeline, CodeBuild e CodeCommit**.
+- Automatizar deploys utilizando `kubectl apply` para atualizar o **cluster EKS** com novas imagens Docker.
+
+## 6. Segurança e Monitoramento:
+- Configurar **AWS WAF, IAM Roles** e criptografia (**AWS KMS**).
+- Monitorar logs e métricas com **AWS CloudWatch** e ferramentas como **Prometheus e Grafana**.
+
+## 7. Testes e Validação:
+- Validar **rotas no Ingress** e testar cargas para escalar **pods e o cluster**.
+
+
+
 ### 2.2 Ferramentas utilizadas
+
+# Ferramentas Utilizadas
+
+## 1. Infraestrutura e Orquestração:
+- **Amazon EKS** para Kubernetes.
+- **Docker** e **Elastic Container Registry (ECR)** para contêineres e imagens.
+- **Terraform, eksctl ou AWS CloudFormation** para criação do cluster e recursos.
+
+## 2. Persistência de Dados:
+- **Amazon RDS (MySQL Multi-AZ)** para o banco de dados.
+- **Amazon S3** para armazenamento de arquivos estáticos.
+
+## 3. CI/CD:
+- **AWS CodePipeline, CodeBuild e CodeCommit** para automação de build e deploy.
+
+## 4. Segurança e Monitoramento:
+- **AWS WAF, Secrets Manager, IAM Roles e AWS KMS** para segurança.
+- **AWS CloudWatch, Prometheus e Grafana** para monitoramento e observabilidade.
+
+
 
 ### 2.3 Diagrama Kubernets
 
+# Diagrama da Infraestrutura na AWS
+
+## Descrição Textual:
+
+### 1. **Frontend**
+- Hospedado no **Kubernetes** (Amazon EKS) ou **Amazon Amplify**.
+
+### 2. **Backend/APIs**
+- Implantados no **Amazon EKS**, utilizando **Deployments e Services**.
+
+### 3. **Banco de Dados**
+- **Amazon RDS MySQL Multi-AZ** para garantir alta disponibilidade e redundância.
+
+### 4. **Armazenamento**
+- **Amazon S3** para persistência de objetos como imagens e vídeos.
+
+### 5. **Rede**
+- **Application Load Balancer (ALB)** conectado a **subnets públicas**.
+- **Subnets privadas** para **worker nodes no EKS**.
+
+### 6. **Segurança**
+- **IAM Roles**, **AWS WAF** e **criptografia (AWS KMS)** para garantir comunicação segura.
+
+## Diagrama Visual:
+Para criar diagramas visuais, pode-se utilizar ferramentas como:
+- **AWS Architecture Diagrams**
+- **Lucidchart**
+- **Draw.io (diagrams.net)**
+
+
+
 ### 2.4 Segurança
 
-# Monitoramento e Segurança na AWS
+# Garantia dos Requisitos de Segurança
 
-## CloudWatch Logs e Metrics
+## 1. **Controle de Acesso**
+- **Políticas IAM** seguindo o princípio do **menor privilégio**.
+- **IAM Roles for Service Accounts (IRSA)** para pods no **Amazon EKS**.
 
-- Instalar o **CloudWatch Agent** ou ativar **Container Insights** para coletar logs e métricas dos pods.
-- Criar **alarmes no CloudWatch** para eventos como:
-  - Alto uso de CPU e memória.
-  - Erros **5xx** no **ALB** (Application Load Balancer).
+## 2. **Proteções contra Ameaças**
+- **AWS WAF** para proteção contra ataques de camada 7, como **SQL Injection (SQLi)** e **Cross-Site Scripting (XSS)**.
+- **Grupos de Segurança (Security Groups)** configurados para **restringir o acesso** ao banco de dados e às APIs.
 
-## WAF + CloudFront
+## 3. **Criptografia**
+- **Dados em trânsito** protegidos com **TLS**.
+- **Dados em repouso** criptografados com **AWS KMS**.
 
-- Utilizar o **CloudFront** como **CDN** para conteúdo estático e cache global.
-- Ativar **AWS WAF** para proteger contra ataques de camada 7, como:
-  - **SQL Injection (SQLi)**
-  - **Cross-Site Scripting (XSS)**
+## 4. **Gerenciamento de Segredos**
+- Uso do **AWS Secrets Manager** para armazenar **credenciais e tokens** com segurança.
 
-## IAM Roles e KMS
 
-- Aplicar o **princípio de menor privilégio** para acesso a recursos.
-- **Criptografar** dados sensíveis utilizando **AWS KMS**.
+# 2. Containerização das Aplicações
 
-## GuardDuty e AWS Config (Opcional)
+## Dockerization
+- Criar `Dockerfile(s)` para as APIs Backend (Nginx e serviços) e o Frontend (React).
+- Configurar o build das imagens usando `docker build`.
 
-- **Monitorar ameaças e conformidade** com **AWS GuardDuty** e **AWS Config**.
-- Configurar **alertas** para:
-  - Acessos suspeitos.
-  - Configurações inadequadas.
+## Armazenar Imagens no Amazon ECR
+- Criar repositórios no Elastic Container Registry (ECR).
+- Enviar imagens para o ECR utilizando `docker push`.
+- Utilizar tags para versionamento de imagens (ex.: `v1.0.0` ou `latest`).
 
----
- **Recomendações**  
-Para garantir a segurança e o monitoramento adequado, revise as permissões IAM regularmente e implemente logs centralizados para auditoria.
+## Configurar Variáveis de Ambiente
+- Endpoints do banco de dados (RDS), URLs das APIs e credenciais seguras.
+- Utilizar o Secrets Manager para evitar exposição de segredos no código.
+
+# 6. Segurança e Monitoramento
+
+## Segurança em Múltiplas Camadas
+- Configurar AWS WAF para proteger contra ataques de camada 7 (SQLi, XSS).
+- IAM Roles e Policies seguindo o princípio do menor privilégio.
+- Criptografia de dados com AWS KMS.
+
+## Monitoramento e Logs
+- **CloudWatch Logs**: Capturar logs dos pods Kubernetes.
+- **Container Insights** para métricas detalhadas.
+- Adicionar ferramentas como **Prometheus** e **Grafana** para gráficos personalizados.
+
 
 
 ### 2.5 Backup
 
+# Processo de Backup
+
+## 1. **Banco de Dados (RDS)**
+- **Backups automáticos** configurados no **Amazon RDS** com **retenção periódica**.
+- **Snapshots regulares** para **restauração de dados**.
+
+## 2. **Arquivos Estáticos (S3)**
+- **Habilitação de versionamento** no **Amazon S3** para arquivos críticos, permitindo a recuperação de versões anteriores.
+
+## 3. **Cluster Kubernetes**
+- Utilização de ferramentas como **Velero** para **backup do estado do cluster**, incluindo **manifests** e **volumes**.
+
+## 4. **Teste de Recuperação**
+- Realização de **testes regulares de recuperação** para validar a eficácia dos backups e garantir que os dados podem ser restaurados corretamente.
+
+
+
 ### 2.6 AWS Pricing 
+
+# Custo da Infraestrutura na AWS (AWS Calculator)
+
+Os custos podem ser estimados com base nos seguintes componentes:
+
+## 1. **Amazon EKS**
+- **Taxa do cluster gerenciado** para o serviço de Kubernetes.
+- **Custo das instâncias EC2** nos **worker nodes** para executar os pods.
+
+## 2. **Amazon RDS**
+- **Configuração Multi-AZ** para garantir alta disponibilidade.
+- **Custos com armazenamento** (por GB) e **backups** automáticos.
+
+## 3. **Amazon S3**
+- **Custos de armazenamento** por GB.
+- **Custos de tráfego de saída** para acessar os dados armazenados.
+
+## 4. **Load Balancer**
+- **Taxas de utilização** do **Application Load Balancer (ALB)**, cobradas com base na quantidade de tráfego processado.
+
+## 5. **Ferramentas de CI/CD**
+- **Custos de execução** do **AWS CodePipeline** e **CodeBuild**, cobrados de acordo com o uso das ferramentas de automação de build e deploy.
+
+
 
