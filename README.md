@@ -15,25 +15,27 @@ Nós somos da empresa "Fast Engineering S/A" e gostaríamos de uma solução dos
 ![ARQUITETURA](Diagramas/ambienteAtual.JPG)
 
 ## 	:mag_right: ÍNDICE
-1. [Lift and Shift](#1-Lift-and-Shift)
-* [Atividades necessárias](#11-atividades-necessárias)
+1. [Lift and Shift](#1-lift-and-shift)
+* [Atividades necessárias](#11-atividades-necessárias-para-a-migração)
 * [Ferramentas utilizadas](#12-ferramentas-utilizadas)
 * [Diagrama As-Is](#13-diagrama-lift-and-shift)
 * [Segurança](#14-segurança)
 * [Backup](#15-backup)
-* [Custo da Infraestrutura](#16-aws-pricing)
-2. [Modernizacao com EKS (Elastic Kubernetes Service)](#2-kubenets)
-*  [Atividades necessárias](#21-atividades-necessárias)
+* [Custo da infraestrutura](#16-custo-de-infraestrutura)
+2. [Modernização com EKS (Elastic Kubernetes Service)](#2-modernização-com-eks-elastic-kubernetes-service)
+* [Atividades necessárias](#21-atividades-necessárias-para-a-migração)
 * [Ferramentas utilizadas](#22-ferramentas-utilizadas)
-* [Diagrama](#23-diagrama-kubernets)
-* [Segurança](#24-segurança)
-* [Backup](#25-backup)
-* [Custo da Infraestrutura](#26-aws-pricing)
+* [Diagrama da modernização](#23-diagrama-kubernets)
+* [Garantia dos requisitos de segurança](#24-garantia-dos-requisitos-de-segurança)
+* [Containerização das aplicações](#25-containerização-das-aplicações)
+* [Segurança e monitoramento](#26-segurança-e-monitoramento)
+* [Backup](#27-backup)
+* [Custo da infraestrutura](#28-aws-pricing)
 
-## 1. Lift and Shift
+# 1. Lift and Shift
 Lift and shift, também conhecida como “rehosting” consiste em migrar uma aplicação de um ambiente para outro, sem grandes mudanças. No projeto, o ambiente on-premises da empresa "Fast Engineering S/A" vai ser migrado para a AWS.
 
-## 1.1 Atividades necessárias
+## 1.1 Atividades necessárias para a migração
 - Analisar a Infraestrutura atual
 
 - Migração do Banco de Dados
@@ -60,7 +62,7 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
     - Monitoramento com CloudWatch
     - Desative os servidores antigos
 
-### 1.2 Ferramentas utilizadas
+## 1.2 Ferramentas utilizadas
 
 - AWS MGN (Application Migration Service) -> Serviço da Amazon para automatizar a migração Lift and Shift de servidores. Documentação: https://docs.aws.amazon.com/mgn/latest/ug/what-is-application-migration-service.html
 - AWS DMS (Database Migration Service) -> Utilizado para migrar dados em um banco on-premises para o RDS. Documentação: https://docs.aws.amazon.com/dms/latest/userguide/Welcome.html
@@ -75,10 +77,10 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
 - Security Groups -> Configuração de segurança e controle de acesso.
 - AWS Pricing Calculator -> Ferramenta da AWS Billing and Cost Management que permite estimar os custos da arquitetura. Documentação: https://docs.aws.amazon.com/cost-management/latest/userguide/pricing-calculator.html
 
-### 1.3 Diagrama Lift and Shift
+## 1.3 Diagrama Lift and Shift
 
 
-### 1.4 Segurança
+## 1.4 Segurança
 
 - VPC com subnet privadas e pública
 - Banco de dados - RDS em subnet privada
@@ -87,20 +89,20 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
 - Criptografia em repouso KMS para RDS e SSE-S3 (Sem custo adicional) para Amazon S3
     - Criptografia em trânsito TLS para RDS e HTTPS para S3
 
-### 1.5 Backup
+## 1.5 Backup
 - AWS backups para EC2
 - RDS ->backups automatizados
 - S3 -> Replication/Versionamento + Ciclo de Vida do S3/Lifecycle Policy
 
-### 1.6 Custo de infraestrutura
+## 1.6 Custo de infraestrutura
 
 ![CUSTO](Diagramas/custoAsIS.JPG)
 
 Para visualizar informações detalhadas sobre a estimativa clique [aqui](https://github.com/mluizabrito/Projeto-Final/blob/main/Aws%20Pricing/custoAws.pdf)
 
-### 2. Modernizacao com EKS (Elastic Kubernetes Service):
+# 2. Modernização com EKS (Elastic Kubernetes Service):
 
-# Objetivos
+## Objetivos
 
 Queremos modernizar esse sistema para **AWS**, seguindo as **melhores práticas de arquitetura em Cloud AWS**.  
 
@@ -114,9 +116,7 @@ A nova arquitetura deve seguir as seguintes diretrizes:
 - **Automação e Infraestrutura como Código**: Provisionar recursos usando **Terraform** ou **AWS CloudFormation**.
 
 
-### 2.1 Atividades necessárias
-
-# Atividades Necessárias para a Migração
+# 2.1 Atividades Necessárias para a Migração
 
 ## 1. Preparação do Ambiente de Contêineres:
 - Criar o cluster Amazon EKS com ferramentas como **eksctl**, **Terraform** ou **CloudFormation**.
@@ -152,9 +152,7 @@ A nova arquitetura deve seguir as seguintes diretrizes:
 
 
 
-### 2.2 Ferramentas utilizadas
-
-# Ferramentas Utilizadas
+# 2.2 Ferramentas utilizadas
 
 ## 1. Infraestrutura e Orquestração:
 - **Amazon EKS** para Kubernetes.
@@ -173,10 +171,7 @@ A nova arquitetura deve seguir as seguintes diretrizes:
 - **AWS CloudWatch, Prometheus e Grafana** para monitoramento e observabilidade.
 
 
-
-### 2.3 Diagrama Kubernets
-
-# Diagrama da Infraestrutura na AWS
+# 2.3 Diagrama Kubernets
 
 ## Descrição Textual:
 
@@ -207,9 +202,7 @@ Para criar diagramas visuais, pode-se utilizar ferramentas como:
 
 
 
-### 2.4 Segurança
-
-# Garantia dos Requisitos de Segurança
+# 2.4 Garantia dos Requisitos de Segurança
 
 ## 1. **Controle de Acesso**
 - **Políticas IAM** seguindo o princípio do **menor privilégio**.
@@ -227,7 +220,7 @@ Para criar diagramas visuais, pode-se utilizar ferramentas como:
 - Uso do **AWS Secrets Manager** para armazenar **credenciais e tokens** com segurança.
 
 
-# 2. Containerização das Aplicações
+# 2.5 Containerização das Aplicações
 
 ## Dockerization
 - Criar `Dockerfile(s)` para as APIs Backend (Nginx e serviços) e o Frontend (React).
@@ -242,7 +235,7 @@ Para criar diagramas visuais, pode-se utilizar ferramentas como:
 - Endpoints do banco de dados (RDS), URLs das APIs e credenciais seguras.
 - Utilizar o Secrets Manager para evitar exposição de segredos no código.
 
-# 6. Segurança e Monitoramento
+# 2.6 Segurança e Monitoramento
 
 ## Segurança em Múltiplas Camadas
 - Configurar AWS WAF para proteger contra ataques de camada 7 (SQLi, XSS).
@@ -254,11 +247,9 @@ Para criar diagramas visuais, pode-se utilizar ferramentas como:
 - **Container Insights** para métricas detalhadas.
 - Adicionar ferramentas como **Prometheus** e **Grafana** para gráficos personalizados.
 
+# 2.7 Backup
 
-
-### 2.5 Backup
-
-# Processo de Backup
+## Processo de Backup
 
 ## 1. **Banco de Dados (RDS)**
 - **Backups automáticos** configurados no **Amazon RDS** com **retenção periódica**.
@@ -274,10 +265,9 @@ Para criar diagramas visuais, pode-se utilizar ferramentas como:
 - Realização de **testes regulares de recuperação** para validar a eficácia dos backups e garantir que os dados podem ser restaurados corretamente.
 
 
+# 2.8 AWS Pricing 
 
-### 2.6 AWS Pricing 
-
-# Custo da Infraestrutura na AWS (AWS Calculator)
+## Custo da Infraestrutura na AWS (AWS Calculator)
 
 Os custos podem ser estimados com base nos seguintes componentes:
 
