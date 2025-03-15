@@ -74,8 +74,9 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
 - Security Groups -> Configuração de segurança e controle de acesso.
 - AWS Pricing Calculator -> Ferramenta da AWS Billing and Cost Management que permite estimar os custos da arquitetura. Documentação: https://docs.aws.amazon.com/cost-management/latest/userguide/pricing-calculator.html
 
-## 1.3 Diagrama Lift and Shift
+# 1.3 Diagrama Lift and Shift
 
+![Diagrama](Diagramas/aws.JPG)
 
 ## 1.4 Segurança
 
