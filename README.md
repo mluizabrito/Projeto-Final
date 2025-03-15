@@ -76,7 +76,7 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
 
 # 1.3 Diagrama Lift and Shift
 
-![Diagrama](Diagramas/aws.JPG)
+![Diagrama](Diagramas/aws.jpg)
 
 ## 1.4 Segurança
 
