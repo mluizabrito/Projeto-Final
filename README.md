@@ -38,6 +38,9 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
 ## 1.1 Atividades necessárias para a migração
 - Analisar a Infraestrutura atual
 
+- Preparação do ambiente na AWS:
+    - Configurar networking -> VPC para isolar os recursos
+
 - Migração do Banco de Dados
     - Criar e configurar Amazon RDS para MySQL
     - Configuração do Amazon DMS (Database Migration Service)
@@ -50,11 +53,6 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
     - Fazer upload dos arquivos do React para o bucket S3
     - Criar e configurar um CloudFront para o bucket
     - Configurar DNS
-
-- Preparação do ambiente na AWS:
-    - Configurar networking -> VPC para isolar os recursos
-    - Configurar security groups para controle de tráfego
-    - Configurar IAM para controlar o acesso aos recursos da AWS
 
 -  Finalizar a migração => Corte
     - Atualize o registro do DNS
