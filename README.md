@@ -57,7 +57,6 @@ Lift and shift, também conhecida como “rehosting” consiste em migrar uma ap
 -  Finalizar a migração => Corte
     - Atualize o registro do DNS
     - Realize o Backup completo do ambiente on-premises antes de desativá-lo
-    - Monitoramento com CloudWatch
     - Desative os servidores antigos
 
 ## 1.2 Ferramentas utilizadas
