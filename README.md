@@ -303,6 +303,11 @@ A nova arquitetura deve seguir as seguintes diretrizes:
 
 
 
+
+Para visualizar informações detalhadas sobre a estimativa clique [aqui](https://github.com/mluizabrito/Projeto-Final/blob/main/Aws%20Pricing/modernização.pdf)
+
+
+
 Os custos podem ser estimados com base nos seguintes componentes:
 
 ### **1. Amazon EKS**  
