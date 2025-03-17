@@ -304,7 +304,7 @@ A nova arquitetura deve seguir as seguintes diretrizes:
 
 
 
-Para visualizar informações detalhadas sobre a estimativa clique [aqui](https://github.com/mluizabrito/Projeto-Final/blob/main/Aws%20Pricing/modernização.pdf)
+Para visualizar informações detalhadas sobre a estimativa clique [aqui](https://github.com/mluizabrito/Projeto-Final/blob/main/Aws%20Pricing/modernizac%CC%A7a%CC%83o.pdf)
 
 
 
