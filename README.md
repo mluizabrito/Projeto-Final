@@ -299,27 +299,31 @@ A nova arquitetura deve seguir as seguintes diretrizes:
 
 ### Custo da Infraestrutura na AWS (AWS Calculator)
 
+![CUSTO](Diagramas/custo_modernizacao.png)
+
 
 
 Os custos podem ser estimados com base nos seguintes componentes:
 
-### 1. **Amazon EKS**
-- **Taxa do cluster gerenciado** para o serviço de Kubernetes.
-- **Custo das instâncias EC2** nos **worker nodes** para executar os pods.
+### **1. Amazon EKS**  
+- Taxa do cluster gerenciado para o serviço de Kubernetes (0,10 USD/hora).  
+- Custo das instâncias EC2 nos worker nodes para executar os pods, dependendo do tipo e quantidade de instâncias utilizadas.  
 
-### 2. **Amazon RDS**
-- **Configuração Multi-AZ** para garantir alta disponibilidade.
-- **Custos com armazenamento** (por GB) e **backups** automáticos.
+### **2. Amazon RDS**  
+- Configuração Multi-AZ para garantir alta disponibilidade.  
+- Custos com armazenamento por GB e backups automáticos.  
 
-### 3. **Amazon S3**
-- **Custos de armazenamento** por GB.
-- **Custos de tráfego de saída** para acessar os dados armazenados.
+### **3. Amazon S3**  
+- Custos de armazenamento por GB para arquivos estáticos e logs.  
+- Custos de tráfego de saída para acessar os dados armazenados.  
 
-### 4. **Load Balancer**
-- **Taxas de utilização** do **Application Load Balancer (ALB)**, cobradas com base na quantidade de tráfego processado.
+### **4. Load Balancer**  
+- Taxas de utilização do Application Load Balancer (ALB), cobradas com base na quantidade de tráfego processado e nas regras configuradas.  
 
-### 5. **Ferramentas de CI/CD**
-- **Custos de execução** do **AWS CodePipeline** e **CodeBuild**, cobrados de acordo com o uso das ferramentas de automação de build e deploy.
+### **5. Segurança e Monitoramento**  
+- Custos do AWS WAF para proteção contra ameaças, cobrados de acordo com o número de regras configuradas.  
+- Taxas do Amazon CloudWatch para armazenamento de logs, métricas e alertas.  
+- Uso do AWS Secrets Manager e AWS KMS para gerenciamento de credenciais e criptografia de dados.  
 
-
-
+### **6. Ferramentas de CI/CD**  
+- Custos de execução do AWS CodePipeline, CodeBuild e CodeCommit, cobrados de acordo com o uso das ferramentas de automação de build e deploy.
